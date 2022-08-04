@@ -1,0 +1,47 @@
+---
+title: "Map in R using Leaflet"
+author: "nthehai01"
+date: '2022-08-04'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, comment = "")
+```
+
+## Background
+
+In this week assignment, we will build an interactive map in R using the `leaflet` package.
+
+## Assignment
+
+Load the package:
+
+```{r}
+library(leaflet)
+```
+
+Feature the current date:
+
+```{r}
+today <- Sys.Date()
+format(today, format="%B %d, %Y")
+```
+
+Create a data frame which contains the latitudes, longitudes and name some of the most popular cities in my country, Viet Nam.
+
+```{r}
+df <- data.frame(
+  name = c("Ho Chi Minh city", "Can Tho city", "Da Nang city", "Ha Noi city"),
+  lat = c(10.777707638668417, 10.032482788518974, 16.061231818072404, 21.03918760364837),
+  lng = c(106.6955783317747, 105.78815569559849, 108.2273211603241, 105.83476591596742)
+)
+```
+
+Draw the map:
+
+```{r}
+df %>% leaflet() %>%
+  addTiles() %>%
+  addMarkers(popup = df$name)
+```
